@@ -33,7 +33,7 @@ windowRoom = Room("Chilly Side Yard", "After crawling through the window you fin
 northHallway = Room("Dim Hallway", "The door creaks open, revealing a dim hallway with another door to the north as well as one to the west.")
 northRoom = Room("Pitch Black Room", "Carefully peering inside reveals...nothing at all? The lights are off silly!")
 westRoom = Room("Your Unfortunate Demise", "Before your hand makes contact with the knob, the door whips open, and you are dragged into utter darkness. Sorry!")
-shedRoom = Room("Seemingly Average Shed", "Upon entering the shed, you are met with a surprsingly large hole that has seemingly been ripped out of the back side of the shed, which leads out to the main street, where you can see other people walking around. You're free!")
+shedRoom = Room("Seemingly Average Shed", "Upon entering the shed, you are met with a surprsingly large hole that has seemingly been ripped out of the back side of the shed, which leads out to the main street, where you can see humanity! You win!")
 startRoom = Room("Lowlight Spooky Room", "You are in a dark room, to the north there is a door, to the east there is a window, and there is a cabinet across from you.")
 
 # Map layout
@@ -98,50 +98,55 @@ while(True):
                 currentRoom = currentRoom.west
                 print(currentRoom.title)
                 print(currentRoom.description)
-        elif choice == "key" or "cabinet" or "light":
+        elif choice == "shed":
+            if "flashlight" in inventory:
+                print(shedRoom.title)
+                print(shedRoom.description)
+                exit()
+            else:
+                print("Without your trusty flashlight you accidentally left in the cabinet, you are swallowed by the darkness! You died!")
+                shedRestart = input("Play again? Y or N? ")
+                shedRestart = shedRestart.lower()
+                if shedRestart == "n":
+                    exit()
+                else:
+                    currentRoom = startRoom
+                    inventory = []
+                    print(startRoom.title)
+                    print(startRoom.description)
+                    continue
+        elif choice == "quit":
+            quit()
+        elif choice == "look":
+            print(currentRoom.title)
+            print(currentRoom.description)
+            continue
+        elif choice == "restart":
+            hardRestart = input("Are you sure you want to restart? Y or N? ")
+            hardRestart = hardRestart.lower()
+            if hardRestart == "y":
+                currentRoom = startRoom
+                print(startRoom.title)
+                print(startRoom.description)
+                inventory = []
+            else:
+                continue
+        elif choice == "cabinet" or "key" or "light":
             if choice == "cabinet":
                 if "key" in inventory:
                     print("You find...a flashlight? You might as well take it too.")
+                    print("Flashlight added to inventory.")
                     inventory.append("flashlight")
-                else:
+                elif "key" not in inventory:
                     print("It's locked you dingus!")
             elif choice == "light":
                 print("The light flashes on, and you see an old copper key on the table next to you...and not much else.")
             elif choice == "key":
                 print("You put the key in your pocket you smarty pants.")
+                print("Key added to inventory.")
                 inventory.append("key")
+            else:
+                print("That's impossible you dangus, try typing just the direction you want to go or the item you want to interact with.")
+
         else:
-            print("That is not possible you goober.")
-
-
-'''
-def north():
-    return
-
-def south():
-    return
-
-def east():
-    return
-
-def west():
-    return
-
-def look():
-    return
-
-def restart():
-    return
-
-def quit():
-    if userInput == 'quit':
-        exit()
-    return
-
-def use():
-    return
-
-def userInput():
-    input()
-    return
-'''
+            print("You must either choose a direction (North, South, East, West) or an item within the room!")
