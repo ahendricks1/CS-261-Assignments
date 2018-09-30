@@ -51,6 +51,7 @@ windowRoom.east = shedRoom
 # Starting position, default room, and default inventory
 currentRoom = startRoom
 inventory = []
+userResponses = ["key", "take key", "cabinet", "open cabinet", "turn on light", "light"]
 print(startRoom.title)
 print(startRoom.description)
 
@@ -131,7 +132,7 @@ while(True):
                 inventory = []
             else:
                 continue
-        elif choice == "cabinet" or "key" or "light":
+        elif choice in userResponses:
             if choice == "cabinet":
                 if "key" in inventory:
                     print("You find...a flashlight? You might as well take it too.")
