@@ -51,7 +51,7 @@ windowRoom.east = shedRoom
 # Default position, room, and inventory
 currentRoom = startRoom
 inventory = []
-userResponses = ["key", "take key", "cabinet", "open cabinet", "turn on light", "light"]
+userResponses = ["key", "take key", "cabinet", "open cabinet", "turn on light", "turn on lights", "light", "lights"]
 print(startRoom.title)
 print(startRoom.description)
 
@@ -99,7 +99,7 @@ while(True):
                 currentRoom = currentRoom.west
                 print(currentRoom.title)
                 print(currentRoom.description)
-        elif choice == "shed":
+        elif choice in ["shed", "go in shed", "open shed"]:
             if "flashlight" in inventory:
                 print(shedRoom.title)
                 print(shedRoom.description)
@@ -116,6 +116,12 @@ while(True):
                     print(startRoom.title)
                     print(startRoom.description)
                     continue
+        elif choice == "jump":
+            print("You did it, you jumped. Never before in the history of man has someone managed what you have done. This day will be remembered for a long time to come.")
+            continue
+        elif choice == "shout":
+            print("First off, ow, give me a heads up next time. Secondly, yes you are in fact all alone in this creepy house.")
+            continue
         elif choice == "quit":
             quit()
         elif choice == "look":
@@ -133,21 +139,21 @@ while(True):
             else:
                 continue
         elif choice in userResponses:
-            if choice == "cabinet":
+            if choice in ["cabinet", "open cabinet"]:
                 if "key" in inventory:
                     print("You find...a flashlight? You might as well take it too.")
                     print("Flashlight added to inventory.")
                     inventory.append("flashlight")
                 elif "key" not in inventory:
                     print("It's locked you dangus, if only you had a key!")
-            elif choice == "light":
+            elif choice in ["light", "lights", "turn on light", "turn on lights"]:
                 print("The light flashes on, and you see an old copper key on the table next to you and...not much else.")
-            elif choice == "key":
+            elif choice in ["key", "take key"]:
                 print("You put the key in your pocket you smarty pants.")
                 print("Key added to inventory.")
                 inventory.append("key")
             else:
-                print("That's impossible you dangus, try typing just the direction you want to go or the item you want to interact with.")
+                print("That's impossible you dangus, try typing just the direction you want to go or the item you want to interact with....maybe try jumping?")
 
         else:
-            print("You must either choose a direction (North, South, East, West) or an item within the room!")
+            print("You must either choose a direction (North, South, East, West) or an item within the room! Or try to shout, maybe someone can hear you?")
