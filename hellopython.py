@@ -48,7 +48,7 @@ windowRoom.south = shedRoom
 windowRoom.west = startRoom
 windowRoom.east = shedRoom
 
-# Starting position, default room, and default inventory
+# Default position, room, and inventory
 currentRoom = startRoom
 inventory = []
 userResponses = ["key", "take key", "cabinet", "open cabinet", "turn on light", "light"]
@@ -139,9 +139,9 @@ while(True):
                     print("Flashlight added to inventory.")
                     inventory.append("flashlight")
                 elif "key" not in inventory:
-                    print("It's locked you dingus!")
+                    print("It's locked you dangus, if only you had a key!")
             elif choice == "light":
-                print("The light flashes on, and you see an old copper key on the table next to you...and not much else.")
+                print("The light flashes on, and you see an old copper key on the table next to you and...not much else.")
             elif choice == "key":
                 print("You put the key in your pocket you smarty pants.")
                 print("Key added to inventory.")
